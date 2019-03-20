@@ -6,6 +6,7 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://vicopo.selfbuild.fr/api.min.js"></script>
     <script type="text/javascript" src="src/js/page.js"></script>
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
     <title>Recherche Photo</title>
 </head>
 <body>
@@ -13,24 +14,37 @@
 
     <form>
         <span>Nombre de Résultat à afficher :
-            <select id="select_nb_result" size="1"></select>
-        </span>
-        </br>
-
-        <span>Ville :
-        <input type="text" id="input_ville" list="list_proposition" autocomplete="on">
-        <datalist id="list_proposition">
-        </datalist>
+        <select id="select_nb_result" size="1"></select>
     </span>
 
         </br>
 
-        <span class="ui-icon ui-icon-search"></span>
-        <span class="ui-icon ui-icon-note"></span>
+        <span>Ville :
+        <input type="text" id="input_ville" list="list_proposition">
+        <datalist id="list_proposition">
+        </datalist>
+    </span>
+
+        </br></br>
+
+        <!-- <span class="ui-icon ui-icon-search"></span>
+        <span class="ui-icon ui-icon-note"></span> -->
+
+        <div id="content">
+            <div id="tabs">
+                <ul>
+                    <li id="li-vue-photo"><a href="#tabs-1">Vue Photo</a></li>
+                    <li id="li-vue-tableau"><a href="#tabs-2">Vue Tableau</a></li>
+                </ul>
+                <div id="tabs-1"></div>
+                <div id="tabs-2"></div>
+            </div>
+        </div>
 
         </br>
 
         <div id="div_print_result"></div>
+
     </form>
 
 </div>

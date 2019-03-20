@@ -1,0 +1,96 @@
+#content {
+    margin: 0 auto;
+    width: 1000px
+}
+
+#tabs ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 30px;
+    border-bottom: 1px solid #666;
+    border-left: 1px solid #666;
+    width: 500px
+}
+#tabs ul li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 29px;
+    line-height: 29px;
+    border-left: none;
+    margin-bottom: -1px;
+    overflow: hidden;
+    position: relative;
+    background: #ddd
+}
+#tabs ul li a {
+    text-decoration: none;
+    color: #888;
+    display: block;
+    font-family: "Trebuchet MS";
+    font-size: 14px;
+    padding: 0 20px
+}
+#tabs ul li a:hover {
+    background: #ccc;
+    color: #666
+}
+
+#tabs-1 {
+}
+
+.ui-tabs {
+    position: relative
+}
+.ui-tabs .ui-tabs-nav {
+    margin: 0
+}
+.ui-tabs .ui-tabs-nav li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-left: none;
+    margin-bottom: -1px;
+    overflow: hidden;
+    position: relative;
+    background: #ddd
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    float: left;
+    padding: 0;
+    text-decoration: none;
+    padding: 0 10px
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #fff
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+    cursor: text;
+    color: #666;
+    background: #fff
+}
+.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+    cursor: pointer
+}
+
+.ui-tabs .ui-tabs-panel {
+    border: 1px solid #ccc;
+    border-top: none;
+    overflow: hidden;
+    clear: both;
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    margin: 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}

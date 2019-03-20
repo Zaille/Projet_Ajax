@@ -26,19 +26,13 @@ $(document).ready(function () {
         }
     });
 
+    $('#tabs ul li#li-vue-photo').on('click', function () {
 
+        let nbResult = $('#select_nb_result').val();
+        // let data = getData($('#input_ville').val()); // TODO Alban
 
-   /* $('#input_ville').on( 'input', function () {
-
-        input.vicopo(function (value) {
-            //$('#vicopo').text(JSON.stringify(value, null, 2));
-
-            value.forEach((ville) => {
-                $('#list_proposition').append('<option value="'+ville.city+', '+ville.code+'">');
-            })
-        });
-    });*/
-
+        showPhotoView( nbResult, null );
+    });
 
 });
 
@@ -46,15 +40,46 @@ function init(){
     for ( let i = 0; i <= 50; i += 5 ){
         $('select').append('<option>' + i + '</option>');
     }
+
+    $("#tabs").tabs();
 }
 
-function showResult() {
+function showPhotoView( nb, data ) {
 
+    let rows = '100px';
+    for( let i = 1; i < nb; i++ ){
+        rows += ' 100px';
+    }
 
+    $('#tabs-1').empty();
 
+    $('#tabs-1').css('grid-template-rows', rows);
 
-    /*for ( let i = 0; i <= 5; i ++ ){
+    for( let i = 0; i < nb; i++ ){
+        $('#tabs-1').append("<div>Photo</div>");
+        $('#tabs-1').append("<div>Text</div>");
+    }
 
-    }*/
-    $("#div_print_result").html("You wrote: " + input.val());
 }
+
+/* function showTabView( nb, data ) {
+
+    alert(nb);
+
+    let rows = '100px';
+    for( let i = 1; i < nb / 5; i++ ){
+        rows += ' 100px';
+    }
+
+    alert(rows);
+
+    $('#tabs-2').empty();
+
+    $('#tabs-2').css('grid-template-rows', rows);
+
+    for( let i = 0; i < nb; i++ ){
+        $('#tabs-2').append("<div>Photo</div>");
+        $('#tabs-2').append("<div>Text</div>");
+    }
+
+} */
