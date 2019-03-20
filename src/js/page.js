@@ -72,8 +72,6 @@ function showPhotoView( nb, data ) {
 
 function showTabView( nb, pic ) {
 
-    alert(nb);
-
     let rows = '150px';
     for( let i = 1; i < nb / 5; i++ ){
         rows += ' 150px';
