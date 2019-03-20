@@ -39,6 +39,11 @@
 }
 
 #tabs-1 {
+    grid-template-columns: 30% 70%;
+}
+
+#tabs-2 {
+    grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .ui-tabs {
@@ -81,6 +86,7 @@
 }
 
 .ui-tabs .ui-tabs-panel {
+    display: grid;
     border: 1px solid #ccc;
     border-top: none;
     overflow: hidden;
@@ -91,6 +97,4 @@
     background: #fff;
     margin: 0;
     padding: 10px;
-    display: grid;
-    grid-template-columns: 30% 70%;
 }

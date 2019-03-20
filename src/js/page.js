@@ -34,6 +34,14 @@ $(document).ready(function () {
         showPhotoView( nbResult, null );
     });
 
+    $('#tabs ul li#li-vue-tableau').on('click', function () {
+
+        let nbResult = $('#select_nb_result').val();
+        // let picture = getPhoto($('#input_ville').val()); // TODO Alban
+
+        showTabView( nbResult, null );
+    });
+
 });
 
 function init(){
@@ -46,9 +54,9 @@ function init(){
 
 function showPhotoView( nb, data ) {
 
-    let rows = '100px';
+    let rows = '200px';
     for( let i = 1; i < nb; i++ ){
-        rows += ' 100px';
+        rows += ' 200px';
     }
 
     $('#tabs-1').empty();
@@ -62,16 +70,14 @@ function showPhotoView( nb, data ) {
 
 }
 
-/* function showTabView( nb, data ) {
+function showTabView( nb, pic ) {
 
     alert(nb);
 
-    let rows = '100px';
+    let rows = '150px';
     for( let i = 1; i < nb / 5; i++ ){
-        rows += ' 100px';
+        rows += ' 150px';
     }
-
-    alert(rows);
 
     $('#tabs-2').empty();
 
@@ -79,7 +85,6 @@ function showPhotoView( nb, data ) {
 
     for( let i = 0; i < nb; i++ ){
         $('#tabs-2').append("<div>Photo</div>");
-        $('#tabs-2').append("<div>Text</div>");
     }
 
-} */
+}
