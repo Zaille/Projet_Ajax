@@ -3,10 +3,21 @@
 $(document).ready(function () {
 
     init();
-
+    let input = $('#input_ville');
     $('#input_ville').on( 'input', function () {
-        showResult();
+
+        input.vicopo(function (value) {
+            //$('#vicopo').text(JSON.stringify(value, null, 2));
+            $('#list_proposition').empty();
+            value.forEach((ville) => {
+                $('#list_proposition').append('<option value="'+ville.city+', '+ville.code+'">');
+            })
+        });
     });
+
+
+
+
 
 });
 
@@ -17,9 +28,12 @@ function init(){
 }
 
 function showResult() {
-    $('#list_proposition').empty();
-    for ( let i = 0; i <= 5; i ++ ){
-        $('#list_proposition').append('<option value="xxx">');
-    }
-    $("#div_print_result").html("You wrote: " + $("#input_ville").val());
+
+
+
+
+    /*for ( let i = 0; i <= 5; i ++ ){
+
+    }*/
+    $("#div_print_result").html("You wrote: " + input.val());
 }
