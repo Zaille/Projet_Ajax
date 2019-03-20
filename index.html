@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">:63342/Projet_Ajax/index.html?_ijt=l3rec9vd9kp1r6f3ju9qunvaqa
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="src/js/page.js"></script>
     <title>Recherche Photo</title>
 </head>
 <body>
 <div>
 
-    <span>Nombre de Résultat à afficher :
+    <form>
+         <span>Nombre de Résultat à afficher :
         <select id="select_nb_result" size="1"></select>
     </span>
 
-    </br>
+        </br>
 
-    <span>Ville : <input type="text" id="input_ville"></span>
+        <span>Ville :
+        <input type="text" id="input_ville" list="list_proposition">
+        <datalist id="list_proposition">
+        </datalist>
+    </span>
 
-    <div id="div_print_result"></div>
+        </br>
+
+        <span class="ui-icon ui-icon-search"></span>
+        <span class="ui-icon ui-icon-note"></span>
+
+        </br>
+
+        <div id="div_print_result"></div>
+    </form>
 
 </div>
 </body>
