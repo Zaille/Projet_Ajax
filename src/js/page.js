@@ -45,7 +45,7 @@ $(document).ready(function () {
 });
 
 function init(){
-    for ( let i = 0; i <= 50; i += 5 ){
+    for ( let i = 5; i <= 50; i += 5 ){
         $('select').append('<option>' + i + '</option>');
     }
 
