@@ -14,16 +14,13 @@
     text-decoration: none;
 }
 
-#tabs ul li a button{
-    width: 50px;
-    height: 50px;
-}
-
 #tabs-1 {
+    display: grid;
     grid-template-columns: 30% 70%;
 }
 
 #tabs-2 {
+    display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
@@ -32,7 +29,6 @@
 }
 
 .ui-tabs .ui-tabs-panel {
-    display: grid;
     border: 1px solid #000;
     overflow: hidden;
     width: 100%;

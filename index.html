@@ -6,6 +6,7 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="src/js/page.js"></script>
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <title>Recherche Photo</title>
 </head>
 <body>
@@ -26,14 +27,20 @@
 
         </br></br>
 
-        <!-- <span class="ui-icon ui-icon-search"></span>
-        <span class="ui-icon ui-icon-note"></span> -->
-
         <div id="content">
             <div id="tabs">
                 <ul>
-                    <li id="li-vue-photo"><a href="#tabs-1"><button class="ui-icon ui-icon-search"></button></a></li>
-                    <li id="li-vue-tableau"><a href="#tabs-2"><button class="ui-icon ui-icon-note"></button></a></li>
+                    <li id="li-vue-photo">
+                        <a href="#tabs-1">
+                            <input type="button" class="ui-icon ui-icon-search">
+
+                        </a>
+                    </li>
+                    <li id="li-vue-tableau">
+                        <a href="#tabs-2">
+                            <input type="button" class="ui-icon ui-icon-note">
+                        </a>
+                    </li>
                 </ul>
                 <div id="tabs-1"></div>
                 <div id="tabs-2"></div>
