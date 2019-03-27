@@ -40,22 +40,32 @@ $(document).ready(function () {
                     api_key: "863289ef8435fbb2ad7b8e376a7fa291",
                     format: "json",
                     text: input.val(),
-                    per_page: $('#select_nb_result').val()
+                    per_page: $('#select_nb_result').val(),
+                    jsoncallback : "showPhotoView"
                 },
                 context: document.body
             });
         }
-
-
-        showPhotoView( nbResult, null );
     });
 
     $('#tabs ul li#li-vue-tableau').on('click', function () {
 
-        let nbResult = $('#select_nb_result').val();
-        // let picture = getPhoto($('#input_ville').val()); // TODO Alban
-
-        showTabView( nbResult, null );
+        let data = {};
+        if(isNaN(input.val())) {
+            $.ajax({
+                method: "GET",
+                url: "https://api.flickr.com/services/rest/",
+                data: {
+                    method: "flickr.photos.search",
+                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                    format: "json",
+                    text: input.val(),
+                    per_page: $('#select_nb_result').val(),
+                    jsoncallback : "photoCallback"
+                },
+                context: document.body
+            });
+        }
     });
 
 });
@@ -68,34 +78,52 @@ function init(){
     $("#tabs").tabs();
 }
 
-function showPhotoView( nb, data ) {
+function showPhotoView(json) {
+    console.log(json);
+
+    $('#tabs-2').empty();
+
+    for(let photo of json.photos.photo){
+        console.log(photo);
+        $('#tabs-2').append("<img src='http://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+".jpg' alt='"+json.title+"'/>");
+    }
 }
 
-function showTabView( nb, pic ) {
-
+function photoCallback(json) {
     let rows = '150px';
     for( let i = 1; i < nb / 5; i++ ){
         rows += ' 150px';
     }
-
-    $('#tabs-2').empty();
-
-    $('#tabs-2').css('grid-template-rows', rows);
-
-    for( let i = 0; i < nb; i++ ){
-        $('#tabs-2').append("<div>Photo</div>");
-
+    let tab1 = $('#tabs-1');
+    tab1.empty();
+    tab1.css('grid-template-rows', rows);
+    for(photo of json.photos.photo) {
+        console.log("hey");
+        tab1.append("<tr>");
+        $.ajax({
+            method: "GET",
+            url: "https://api.flickr.com/services/rest/",
+            data: {
+                method: "flickr.photos.getInfo",
+                api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                format: "json",
+                photo_id: photo.id,
+                secret: photo.secret,
+                jsoncallback: "showTabView"
+            },
+            error : (data) => {
+                console.log(data)
+            },
+            context: document.body
+        });
+        tab1.append("</tr>");
     }
-
+    tab1.DataTable();
 }
 
-function jsonFlickrApi(json) {
-    console.log(json);
+function showTabView(json) {
 
-    $('#tabs-1').html('');
+    console.log(json)
 
-    for(let photo of json.photos.photo){
-        console.log(photo);
-        $('#tabs-1').append("<img src='http://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+".jpg' alt='"+json.title+"'/>");
-    }
+
 }

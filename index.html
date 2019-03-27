@@ -7,6 +7,11 @@
     <script type="text/javascript" src="src/js/page.js"></script>
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
     <title>Recherche Photo</title>
 </head>
 <body>
@@ -42,7 +47,20 @@
                         </a>
                     </li>
                 </ul>
-                <div id="tabs-1"></div>
+                <table id="tabs-1">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Nom</th>
+                            <th>Date</th>
+                            <th>Auteur</th>
+                            <th>ID de l'auteur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
                 <div id="tabs-2"></div>
             </div>
         </div>
