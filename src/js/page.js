@@ -30,6 +30,22 @@ $(document).ready(function () {
 
         let nbResult = $('#select_nb_result').val();
         // let data = getData($('#input_ville').val()); // TODO Alban
+        let data = {};
+        if(isNaN(input.val())) {
+            $.ajax({
+                method: "GET",
+                url: "https://api.flickr.com/services/rest/",
+                data: {
+                    method: "flickr.photos.search",
+                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                    format: "json",
+                    text: input.val(),
+                    per_page: $('#select_nb_result').val()
+                },
+                context: document.body
+            });
+        }
+
 
         showPhotoView( nbResult, null );
     });
@@ -53,21 +69,6 @@ function init(){
 }
 
 function showPhotoView( nb, data ) {
-
-    let rows = '200px';
-    for( let i = 1; i < nb; i++ ){
-        rows += ' 200px';
-    }
-
-    $('#tabs-1').empty();
-
-    $('#tabs-1').css('grid-template-rows', rows);
-
-    for( let i = 0; i < nb; i++ ){
-        $('#tabs-1').append("<div>Photo</div>");
-        $('#tabs-1').append("<div>Text</div>");
-    }
-
 }
 
 function showTabView( nb, pic ) {
@@ -83,6 +84,18 @@ function showTabView( nb, pic ) {
 
     for( let i = 0; i < nb; i++ ){
         $('#tabs-2').append("<div>Photo</div>");
+
     }
 
+}
+
+function jsonFlickrApi(json) {
+    console.log(json);
+
+    $('#tabs-1').html('');
+
+    for(let photo of json.photos.photo){
+        console.log(photo);
+        $('#tabs-1').append("<img src='http://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+".jpg' alt='"+json.title+"'/>");
+    }
 }
