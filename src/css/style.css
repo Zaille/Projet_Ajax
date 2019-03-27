@@ -1,17 +1,22 @@
 #content {
-    margin: 0 auto;
-    width: 1000px
+    margin: 30px;
 }
 
 #tabs ul {
     list-style: none;
 }
+
 #tabs ul li {
     display: inline-block;
 }
 
 #tabs ul li a {
     text-decoration: none;
+}
+
+#tabs ul li a input{
+    width: 20px;
+    height: 20px;
 }
 
 #tabs-1 {
@@ -24,17 +29,30 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
-.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor, .ui-tabs div.div-container-pic img {
     cursor: pointer
 }
 
 .ui-tabs .ui-tabs-panel {
     border: 1px solid #000;
     overflow: hidden;
-    width: 100%;
     height: auto;
 }
 
-.ui-tabs div {
+.ui-tabs div.div-container-pic {
     padding: 10px;
+    max-height: 150px;
+    transition: .3s;
+    text-align: center;
+}
+
+.ui-tabs div.div-container-pic:hover {
+    padding-top: 0;
+    z-index: 9999;
+}
+
+.ui-tabs div.div-container-pic img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
 }

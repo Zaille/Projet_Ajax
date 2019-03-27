@@ -29,7 +29,6 @@ $(document).ready(function () {
     $('#tabs ul li#li-vue-tableau').on('click', function () {
 
         let nbResult = $('#select_nb_result').val();
-        // let data = getData($('#input_ville').val()); // TODO Alban
         let data = {};
         if(isNaN(input.val())) {
             $.ajax({
@@ -85,17 +84,22 @@ function showPhotoView(json) {
 
     for(let photo of json.photos.photo){
         console.log(photo);
-        $('#tabs-2').append("<img src='http://farm"+photo.farm+".staticflickr.com/"+photo.server+"/"+photo.id+"_"+photo.secret+".jpg' alt='"+json.title+"'/>");
+        $('#tabs-2').append("<div class='div-container-pic'><img src='http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' alt='" + json.title + "'/></div>");
     }
 }
 
 function photoCallback(json) {
+
     let rows = '150px';
+
     for( let i = 1; i < nb / 5; i++ ){
         rows += ' 150px';
     }
+
     let tab1 = $('#tabs-1');
+
     tab1.empty();
+
     tab1.css('grid-template-rows', rows);
     for(photo of json.photos.photo) {
         console.log("hey");
@@ -113,9 +117,12 @@ function photoCallback(json) {
             },
             context: document.body
         });
+
         tab1.append("</tr>");
     }
+
     tab1.DataTable();
+
 }
 
 function showTabView(json) {
