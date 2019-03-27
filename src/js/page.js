@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#tabs ul li#li-vue-photo').on('click', function () {
+    $('#tabs ul li#li-vue-tableau').on('click', function () {
 
         let nbResult = $('#select_nb_result').val();
         // let data = getData($('#input_ville').val()); // TODO Alban
@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#tabs ul li#li-vue-tableau').on('click', function () {
+    $('#tabs ul li#li-vue-photo').on('click', function () {
 
         let data = {};
         if(isNaN(input.val())) {
@@ -110,9 +110,6 @@ function photoCallback(json) {
                 photo_id: photo.id,
                 secret: photo.secret,
                 jsoncallback: "showTabView"
-            },
-            error : (data) => {
-                console.log(data)
             },
             context: document.body
         });
