@@ -27,29 +27,6 @@ $(document).ready(function () {
     });
 
     $('#tabs ul li#li-vue-tableau').on('click', function () {
-
-        let nbResult = $('#select_nb_result').val();
-        let data = {};
-        if(isNaN(input.val())) {
-            $.ajax({
-                method: "GET",
-                url: "https://api.flickr.com/services/rest/",
-                data: {
-                    method: "flickr.photos.search",
-                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
-                    format: "json",
-                    text: input.val(),
-                    per_page: $('#select_nb_result').val(),
-                    jsoncallback : "showPhotoView"
-                },
-                context: document.body
-            });
-        }
-    });
-
-    $('#tabs ul li#li-vue-photo').on('click', function () {
-
-        let data = {};
         if(isNaN(input.val())) {
             $.ajax({
                 method: "GET",
@@ -67,6 +44,25 @@ $(document).ready(function () {
         }
     });
 
+    $('#tabs ul li#li-vue-photo').on('click', function () {
+
+        if(isNaN(input.val())) {
+            $.ajax({
+                method: "GET",
+                url: "https://api.flickr.com/services/rest/",
+                data: {
+                    method: "flickr.photos.search",
+                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                    format: "json",
+                    text: input.val(),
+                    per_page: $('#select_nb_result').val(),
+                    jsoncallback : "showPhotoView"
+                },
+                context: document.body
+            });
+        }
+    });
+
 });
 
 function init(){
@@ -78,32 +74,34 @@ function init(){
 }
 
 function showPhotoView(json) {
-    console.log(json);
 
     $('#tabs-2').empty();
 
     for(let photo of json.photos.photo){
-        console.log(photo);
-        $('#tabs-2').append("<div class='div-container-pic'><img src='http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' alt='" + json.title + "'/></div>");
+        $('#tabs-2').append("<div class='div-container-pic'>" +
+            "<img src='http://farm" + photo.farm + ".staticflickr.com/"
+            + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' " +
+            "alt='" + json.title + "'/></div>");
     }
 }
 
 function photoCallback(json) {
 
-    let rows = '150px';
-
-    for( let i = 1; i < nb / 5; i++ ){
-        rows += ' 150px';
-    }
-
     let tab1 = $('#tabs-1');
-
     tab1.empty();
+    tab1.append("<thead>"+
+        "<tr>"+
+        "<th>Photo</th>"+
+        "<th>Titre</th>"+
+        "<th>Date</th>"+
+        "<th>Auteur</th>"+
+        "<th>ID de l'auteur</th>"+
+        "</tr>"+
+        "</thead>"+
+        "<tbody id='tableBody'>"+
+        "</tbody>");
 
-    tab1.css('grid-template-rows', rows);
-    for(photo of json.photos.photo) {
-        console.log("hey");
-        tab1.append("<tr>");
+    for(let photo of json.photos.photo) {
         $.ajax({
             method: "GET",
             url: "https://api.flickr.com/services/rest/",
@@ -117,17 +115,23 @@ function photoCallback(json) {
             },
             context: document.body
         });
-
-        tab1.append("</tr>");
     }
-
     tab1.DataTable();
+
 
 }
 
 function showTabView(json) {
-
-    console.log(json)
-
-
+    let tab1 = $('#tableBody');
+    tab1.append("<tr>"+
+        "<td>" +
+        "<img src='http://farm" + json.photo.farm + ".staticflickr.com/"
+        + json.photo.server + "/" + json.photo.id + "_" + json.photo.secret + ".jpg' " +
+        "alt='" + json.title + "'/>"+
+        "</td>"+
+        "<td>"+json.photo.title._content+"</td>"+
+        "<td>"+json.photo.dates.taken+"</td>"+
+        "<td>"+json.photo.owner.username+"</td>"+
+        "<td>"+json.photo.owner.nsid+"</td>"+
+        "</tr>")
 }
