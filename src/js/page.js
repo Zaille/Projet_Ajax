@@ -116,9 +116,6 @@ function photoCallback(json) {
             context: document.body
         });
     }
-    tab1.DataTable();
-
-
 }
 
 function showTabView(json) {
@@ -133,5 +130,6 @@ function showTabView(json) {
         "<td>"+json.photo.dates.taken+"</td>"+
         "<td>"+json.photo.owner.username+"</td>"+
         "<td>"+json.photo.owner.nsid+"</td>"+
-        "</tr>")
+        "</tr>");
+    $('#tabs-1').DataTable();
 }
