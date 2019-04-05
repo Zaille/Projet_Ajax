@@ -104,13 +104,14 @@ function showPhotoView(json) {
 
         });
 
-        $('.modal_close').on('click', function () {
-
-            popClose();
-
-        });
-
     }
+
+    $('.modal_close').on('click', function () {
+
+        popClose();
+
+    });
+
 }
 
 function photoCallback(json) {
@@ -165,6 +166,15 @@ function showTabView(json) {
 
 function popOpen( json ) {
 
+    $( '#imgDisplay' ).attr('src', 'http://farm' + json.photo.farm + '.staticflickr.com/' +
+        json.photo.server + '/' + json.photo.id + '_' + json.photo.secret + '.jpg' );
+    $( '#imgDisplay' ).attr('alt', json.title );
+
+    $('#titre').append(json.photo.title._content);
+    $('#date').append(json.photo.dates.taken);
+    $('#nom_utilisateur').append(json.photo.owner.username);
+
+    $( '.modal, .modalbg' ).show();
     $( '.modal, .modalbg' ).fadeTo( 300, 1 );
 
 }
@@ -174,6 +184,13 @@ function popClose(){
     $( '.modal, .modalbg' ).fadeTo( 300, 0, function () {
 
         $( '.modal, .modalbg' ).hide();
+
+        $( '#imgDisplay' ).attr('src', '' );
+        $( '#imgDisplay' ).attr('alt', '' );
+
+        $('#titre').empty().append('<b>Titre :</b>');
+        $('#date').empty().append('<b>Date :</b>');
+        $('#nom_utilisateur').empty().append('<b>Nom Utilisateur :</b>');
 
     } );
 
