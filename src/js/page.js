@@ -78,10 +78,38 @@ function showPhotoView(json) {
     $('#tabs-2').empty();
 
     for(let photo of json.photos.photo){
+
         $('#tabs-2').append("<div class='div-container-pic'>" +
-            "<img src='http://farm" + photo.farm + ".staticflickr.com/"
+            "<img id='" + photo.id +  "' src='http://farm" + photo.farm + ".staticflickr.com/"
             + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' " +
             "alt='" + json.title + "'/></div>");
+
+        let $id = $('#' + photo.id );
+
+        $id.on('click', function () {
+
+            $.ajax({
+                method: "GET",
+                url: "https://api.flickr.com/services/rest/",
+                data: {
+                    method: "flickr.photos.getInfo",
+                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                    format: "json",
+                    photo_id: photo.id,
+                    secret: photo.secret,
+                    jsoncallback: "popOpen"
+                },
+                context: document.body
+            });
+
+        });
+
+        $('.modal_close').on('click', function () {
+
+            popClose();
+
+        });
+
     }
 }
 
@@ -132,4 +160,21 @@ function showTabView(json) {
         "<td>"+json.photo.owner.nsid+"</td>"+
         "</tr>");
     $('#tabs-1').DataTable();
+
+}
+
+function popOpen( json ) {
+
+    $( '.modal, .modalbg' ).fadeTo( 300, 1 );
+
+}
+
+function popClose(){
+
+    $( '.modal, .modalbg' ).fadeTo( 300, 0, function () {
+
+        $( '.modal, .modalbg' ).hide();
+
+    } );
+
 }

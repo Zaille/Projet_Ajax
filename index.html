@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="src/js/page.js"></script>
+
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
     <title>Recherche Photo</title>
 </head>
@@ -18,20 +20,21 @@
 <div>
 
     <form>
-        <span>Nombre de Résultat à afficher :
-        <select id="select_nb_result" size="1"></select>
-    </span>
+        <div>
 
-        <br/>
+        <span class="input-header">Nombre de Résultat à afficher :
+            <select id="select_nb_result" size="1"></select>
+        </span>
 
-        <span>Ville :
-        <input type="text" id="input_ville" list="list_proposition">
-        <datalist id="list_proposition">
-        </datalist>
-    </span>
+            <br>
 
-        <br/>
-        <br/>
+        <span class="input-header">Ville :
+            <input type="text" id="input_ville" list="list_proposition">
+            <datalist id="list_proposition"></datalist>
+        </span>
+        </div>
+
+        <br><br>
 
         <div id="content">
             <div id="tabs">
@@ -57,5 +60,19 @@
     </form>
 
 </div>
+<div class="modal">
+    <span class="modal_close">&#215;</span>
+    <div class="divImgClick">
+        <span id="rightPic" class="ui-icon ui-icon-caret-1-w" style="transform: scale(2);"></span>
+        <img id="imgDisplay" src='' alt=''/>
+        <span id="leftPic" class="ui-icon ui-icon-caret-1-e" style="transform: scale(2);"></span>
+    </div>
+    <div class="infoImage">
+        <div id="titre" ><b>Titre :</b></div>
+        <div id="date" ><b>Date :</b></div>
+        <div id="nom_utilisateur" ><b>Nom Utilisateur :</b></div>
+    </div>
+</div>
+<div class="modalbg"></div>
 </body>
 </html>
