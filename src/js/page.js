@@ -127,8 +127,7 @@ function showPhotoView(json) {
  */
 function photoCallback(json) {
 
-    // Initialisation des colonnes de la vue 'tableau'
-    let tab1 = $('tbody');
+    let tab1 = $('table');
     tab1.empty();
     tab1.append("<thead>"+
         "<tr>"+
@@ -139,10 +138,10 @@ function photoCallback(json) {
         "<th>ID de l'auteur</th>"+
         "</tr>"+
         "</thead>"+
-        "<tbody id='tableBody'>"+
+        "<tbody>"+
         "</tbody>");
 
-    for(let photo of json.photos.photo) { // Pour chaque photo correspondant à la recherche, on envoit une requête pour recevoir les informations
+    for(let photo of json.photos.photo) {
         $.ajax({
             method: "GET",
             url: "https://api.flickr.com/services/rest/",
@@ -166,10 +165,6 @@ function photoCallback(json) {
     }
 }
 
-/**
- * Remplir la vue 'tableau'
- * @param json JSON contenant les informations spécifiques à la recherche
- */
 function showTabView(json) {
     let tab1 = $('tbody');
     tab1.append("<tr>"+
@@ -182,9 +177,11 @@ function showTabView(json) {
         "<td>"+json.photo.dates.taken+"</td>"+
         "<td>"+json.photo.owner.username+"</td>"+
         "<td>"+json.photo.owner.nsid+"</td>"+
-        "</tr>"); // Ajout d'une ligne contenant toutes les informations utiles d'une photo dans la vue 'tableau'
+        "</tr>");
+
 
 }
+
 
 /**
  * Ouvre la fenêtre d'information d'une photo
