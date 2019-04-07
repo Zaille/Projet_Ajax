@@ -84,40 +84,46 @@ function showPhotoView(json) {
 
     $('#tabs-2').empty();
 
-    for(let photo of json.photos.photo){ // Pour toute photo correspondant à la recherche
+    if(json.photos.photo.length === 0){
+        alert('Pas de photo disponible')
+    }
+    else {
+        for (let photo of json.photos.photo) { // Pour toute photo correspondant à la recherche
 
-        $('#tabs-2').append("<div class='div-container-pic'>" +
-            "<img id='" + photo.id +  "' src='http://farm" + photo.farm + ".staticflickr.com/"
-            + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' " +
-            "alt='" + json.title + "'/></div>"); // On ajoute la photo au tableau
+            $('#tabs-2').append("<div class='div-container-pic'>" +
+                "<img id='" + photo.id + "' src='http://farm" + photo.farm + ".staticflickr.com/"
+                + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' " +
+                "alt='" + json.title + "'/></div>"); // On ajoute la photo au tableau
 
-        let $id = $('#' + photo.id ); // On récupère son id
+            let $id = $('#' + photo.id); // On récupère son id
 
-        $id.on('click', function () { // Listener pour ouvrir la fenêtre d'information correspondant à la photo
+            $id.on('click', function () { // Listener pour ouvrir la fenêtre d'information correspondant à la photo
 
-            $.ajax({
-                method: "GET",
-                url: "https://api.flickr.com/services/rest/",
-                data: {
-                    method: "flickr.photos.getInfo",
-                    api_key: "863289ef8435fbb2ad7b8e376a7fa291",
-                    format: "json",
-                    photo_id: photo.id,
-                    secret: photo.secret,
-                    jsoncallback: "popOpen"
-                },
-                context: document.body
+                $.ajax({
+                    method: "GET",
+                    url: "https://api.flickr.com/services/rest/",
+                    data: {
+                        method: "flickr.photos.getInfo",
+                        api_key: "863289ef8435fbb2ad7b8e376a7fa291",
+                        format: "json",
+                        photo_id: photo.id,
+                        secret: photo.secret,
+                        jsoncallback: "popOpen"
+                    },
+                    context: document.body
+                });
+
             });
+
+        }
+
+        $('.modal_close').on('click', function () { // Fermeture de la fenêtre d'information si l'utilisateur clique sur l'icon 'x' de la fenêtre
+
+            popClose();
 
         });
 
     }
-
-    $('.modal_close').on('click', function () { // Fermeture de la fenêtre d'information si l'utilisateur clique sur l'icon 'x' de la fenêtre
-
-        popClose();
-
-    });
 
 }
 
