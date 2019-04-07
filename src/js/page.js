@@ -2,12 +2,12 @@
 
 $(document).ready(function () {
 
-    init();
+    init(); // Initialisation
 
     let input = $('#input_ville');
-    input.on('input', function () {
+    input.on('input', function () { // Auto-complétion
         if(isNaN(input.val()) && (input.val().length >=3)) {
-            $.ajax({
+            $.ajax({ // Requête pour chercher les noms
                 method: "GET",
                 url: "https://geo.api.gouv.fr/communes?",
                 data: {
@@ -15,7 +15,7 @@ $(document).ready(function () {
                     fields : "nom",
                 },
                 context: document.body
-            }).done(function (json) {
+            }).done(function (json) { // Insertion des noms de ville récupérés
                 let prop = $('#list_proposition');
                 prop.empty();
                 json.forEach((ville) => {
@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#tabs ul li#li-vue-tableau').on('click', function () {
+    $('#tabs ul li#li-vue-tableau').on('click', function () { // Initialisation et affichage de la vue 'tableau'
         if(isNaN(input.val())) {
             $.ajax({
                 method: "GET",
@@ -44,7 +44,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#tabs ul li#li-vue-photo').on('click', function () {
+    $('#tabs ul li#li-vue-photo').on('click', function () { // Initialisation et affichage de la vue 'photo'
 
         if(isNaN(input.val())) {
             $.ajax({
@@ -65,28 +65,35 @@ $(document).ready(function () {
 
 });
 
+/**
+ * Initialise la page
+ */
 function init(){
-    for ( let i = 5; i <= 50; i += 5 ){
+    for ( let i = 5; i <= 50; i += 5 ){ // Initialisation du selecteur permettant de choisir le nombre de résultats que l'utilisateur souhaite recevoir
         $('select').append('<option>' + i + '</option>');
     }
 
-    $("#tabs").tabs();
+    $("#tabs").tabs(); // Initialisation des vues 'tabs'
 }
 
+/**
+ * Remplir la vue 'photo'
+ * @param json JSON contenant les informations spécifiques à la recherche
+ */
 function showPhotoView(json) {
 
     $('#tabs-2').empty();
 
-    for(let photo of json.photos.photo){
+    for(let photo of json.photos.photo){ // Pour toute photo correspondant à la recherche
 
         $('#tabs-2').append("<div class='div-container-pic'>" +
             "<img id='" + photo.id +  "' src='http://farm" + photo.farm + ".staticflickr.com/"
             + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg' " +
-            "alt='" + json.title + "'/></div>");
+            "alt='" + json.title + "'/></div>"); // On ajoute la photo au tableau
 
-        let $id = $('#' + photo.id );
+        let $id = $('#' + photo.id ); // On récupère son id
 
-        $id.on('click', function () {
+        $id.on('click', function () { // Listener pour ouvrir la fenêtre d'information correspondant à la photo
 
             $.ajax({
                 method: "GET",
@@ -106,7 +113,7 @@ function showPhotoView(json) {
 
     }
 
-    $('.modal_close').on('click', function () {
+    $('.modal_close').on('click', function () { // Fermeture de la fenêtre d'information si l'utilisateur clique sur l'icon 'x' de la fenêtre
 
         popClose();
 
@@ -114,8 +121,13 @@ function showPhotoView(json) {
 
 }
 
+/**
+ * Initialisation des informations pour la vue 'tableau'
+ * @param json JSON contenant les informations spécifiques à la recherche
+ */
 function photoCallback(json) {
 
+    // Initialisation des colonnes de la vue 'tableau'
     let tab1 = $('#tabs-1');
     tab1.empty();
     tab1.append("<thead>"+
@@ -130,7 +142,7 @@ function photoCallback(json) {
         "<tbody id='tableBody'>"+
         "</tbody>");
 
-    for(let photo of json.photos.photo) {
+    for(let photo of json.photos.photo) { // Pour chaque photo correspondant à la recherche, on envoit une requête pour recevoir les informations
         $.ajax({
             method: "GET",
             url: "https://api.flickr.com/services/rest/",
@@ -147,6 +159,10 @@ function photoCallback(json) {
     }
 }
 
+/**
+ * Remplir la vue 'tableau'
+ * @param json JSON contenant les informations spécifiques à la recherche
+ */
 function showTabView(json) {
     let tab1 = $('#tableBody');
     tab1.append("<tr>"+
@@ -159,32 +175,43 @@ function showTabView(json) {
         "<td>"+json.photo.dates.taken+"</td>"+
         "<td>"+json.photo.owner.username+"</td>"+
         "<td>"+json.photo.owner.nsid+"</td>"+
-        "</tr>");
+        "</tr>"); // Ajout d'une ligne contenant toutes les informations utiles d'une photo dans la vue 'tableau'
     $('#tabs-1').DataTable();
 
 }
 
+/**
+ * Ouvre la fenêtre d'information d'une photo
+ * @param json JSON contenant les informations spécifiques à la photo
+ */
 function popOpen( json ) {
 
     $( '#imgDisplay' ).attr('src', 'http://farm' + json.photo.farm + '.staticflickr.com/' +
-        json.photo.server + '/' + json.photo.id + '_' + json.photo.secret + '.jpg' );
+        json.photo.server + '/' + json.photo.id + '_' + json.photo.secret + '.jpg' ); // Ajout de la source de la photo sélectionné à l'image prévu dans la fenêtre d'information
     $( '#imgDisplay' ).attr('alt', json.title );
 
+    // Ajout des informations liées à la photo
     $('#titre').append(json.photo.title._content);
     $('#date').append(json.photo.dates.taken);
     $('#nom_utilisateur').append(json.photo.owner.username);
 
+    // Affichage avec transition de la fenêtre
     $( '.modal, .modalbg' ).show();
     $( '.modal, .modalbg' ).fadeTo( 300, 1 );
 
 }
 
+/**
+ * Ferme la fenêtre d'information d'une photo
+ */
 function popClose(){
 
+    // Fermeture avec transition de la fenêtre
     $( '.modal, .modalbg' ).fadeTo( 300, 0, function () {
 
-        $( '.modal, .modalbg' ).hide();
+        $( '.modal, .modalbg' ).hide(); // On cache les élément car les éléments sont seulement transparent jusque là
 
+        // Réinitialisation des différents éléments d'information
         $( '#imgDisplay' ).attr('src', '' );
         $( '#imgDisplay' ).attr('alt', '' );
 
