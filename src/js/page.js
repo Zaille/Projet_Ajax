@@ -128,7 +128,7 @@ function showPhotoView(json) {
 function photoCallback(json) {
 
     // Initialisation des colonnes de la vue 'tableau'
-    let tab1 = $('#tabs-1');
+    let tab1 = $('tbody');
     tab1.empty();
     tab1.append("<thead>"+
         "<tr>"+
@@ -155,7 +155,14 @@ function photoCallback(json) {
                 jsoncallback: "showTabView"
             },
             context: document.body
-        });
+        }).complete(
+            function () {
+                setTimeout(function () {
+                    $('table').DataTable();
+                },500);
+
+            }
+        );
     }
 }
 
@@ -164,7 +171,7 @@ function photoCallback(json) {
  * @param json JSON contenant les informations spécifiques à la recherche
  */
 function showTabView(json) {
-    let tab1 = $('#tableBody');
+    let tab1 = $('tbody');
     tab1.append("<tr>"+
         "<td>" +
         "<img src='http://farm" + json.photo.farm + ".staticflickr.com/"
@@ -176,7 +183,6 @@ function showTabView(json) {
         "<td>"+json.photo.owner.username+"</td>"+
         "<td>"+json.photo.owner.nsid+"</td>"+
         "</tr>"); // Ajout d'une ligne contenant toutes les informations utiles d'une photo dans la vue 'tableau'
-    $('#tabs-1').DataTable();
 
 }
 
